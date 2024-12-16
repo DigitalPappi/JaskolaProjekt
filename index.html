@@ -187,6 +187,46 @@ header img {
             margin-top: 20px;
             background-color: #000;
             color: white;
+            /* Media Queries dla ekranów o szerokości do 768px (smartfony) */
+@media (max-width: 768px) {
+    header {
+        height: 100px; /* Mniejsza wysokość header na telefonach */
+    }
+
+    header img {
+        max-height: 80px; /* Zmniejszenie logo */
+    }
+
+    .hero {
+        height: 70vh; /* Skrócenie sekcji hero na małych ekranach */
+    }
+
+    .gallery-container {
+        flex-direction: column; /* Zmiana układu galerii na pionowy */
+        gap: 20px;
+    }
+
+    .gallery-item {
+        flex: none; /* Przywrócenie pełnej szerokości dla elementów galerii */
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .lightbox-carousel {
+        max-width: 95%;
+        max-height: 60%;
+    }
+
+    .description {
+        font-size: 0.9rem; /* Zmniejszenie tekstu opisu */
+        padding: 10px;
+    }
+
+    footer {
+        font-size: 0.8rem; /* Mniejsza czcionka dla stopki */
+    }
+}
+
         }
     </style>
 </head>
