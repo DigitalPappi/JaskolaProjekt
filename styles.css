@@ -151,7 +151,23 @@ header {
     color: white;
     text-align: center;
 }
+@media (max-width: 799px) {
+    .section {
+        min-height: 100svh; /* Używamy "svh" zamiast "vh" dla poprawnej wysokości na iOS i Android */
+        height: auto; /* Zapewnia dostosowanie do zawartości */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: visible; /* Zapewnia, że nic nie jest ucinane */
+    }
 
+    /* 🔹 Poprawione przewijanie i scroll snap */
+    .container {
+        scroll-snap-type: y proximity; /* Mniej agresywne przewijanie */
+        overflow-y: auto; /* Pozwala na normalne przewijanie */
+    }
+}
 
 
 .section1 { /*1 sekcja */
