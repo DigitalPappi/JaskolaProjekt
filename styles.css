@@ -1,0 +1,882 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+    overflow: auto;
+}
+
+/* Header */
+/* Nagłówek */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Domyślnie */
+    background-color: hsl(0, 0%, 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px; /* Odstęp wewnętrzny */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Kontener nagłówka */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Rozdzielenie logo i nawigacji */
+    width: 100%;
+}
+
+/* Logo */
+.logo {
+    height: 80px; /* Domyślnie */
+    margin-right: 15px;
+}
+
+
+/* Nawigacja */
+.nav-menu {
+    display: flex;
+    gap: 15px; /* Odstęp między linkami */
+}
+
+/* Linki nawigacyjne */
+.nav-menu a {
+    color: #000000;
+    white-space: nowrap; /* Zapobiega zawijaniu tekstu */
+    text-decoration: none;
+    font-size: 1rem; /* Domyślna czcionka */
+    font-weight: bold;
+    transition: background-color 1s ease, color 1.8s ease;
+    position: relative;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+/* Styl aktywnego linku */
+.nav-menu a.active {
+    background-color: #f0c040;
+    color: #333;
+}
+
+
+/* 📱 Dla ekranów poniżej 768px (Smartfony) */
+@media (max-width: 799px) {
+    header {
+        height: 100px;
+    }
+
+    .logo {
+        height: 60px;
+        display: block;
+        position: absolute;
+        top: 10px; /* Przesunięcie logo do góry */
+        left: 50%;
+        transform: translateX(-50%); /* Wyśrodkowanie logo */
+    }
+
+    .nav-menu {
+        position: absolute;
+        bottom: 0; /* Przesunięcie do dolnej krawędzi headera */
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .nav-menu a {
+        font-size: 0.7rem;
+        padding: 7px 10px;
+    }
+}
+@media (max-width: 400px) {
+    header {
+        height: 100px;
+    }
+
+    .logo {
+        height: 60px;
+        display: block;
+        position: absolute;
+        top: 10px; /* Przesunięcie logo do góry */
+        left: 50%;
+        transform: translateX(-50%); /* Wyśrodkowanie logo */
+    }
+
+    .nav-menu {
+        position: absolute;
+        bottom: 0; /* Przesunięcie do dolnej krawędzi headera */
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .nav-menu a {
+        font-size: 0.6rem;
+        padding: 4px 7px;
+    }
+}
+
+
+
+
+
+/* Kontener przewijania */
+.container {
+    height: 100vh; /* Cała wysokość widoku */
+    scroll-snap-type: y mandatory; /* Wymuszenie przewijania w pionie */
+    overflow-y: scroll; /* Włączenie przewijania */
+    scroll-behavior: smooth; /* Płynne przewijanie */
+}
+
+/* Sekcje */
+.section {
+    height: 100vh; /* Każda sekcja zajmuje cały ekran */
+    padding-top: 100px;
+    scroll-snap-align: start; /* Sekcja zatrzymuje się na początku */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+}
+
+
+
+.section1 { /*1 sekcja */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+
+/* Sekcja 2 */
+#section2 {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#section2 h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Siatka kafelków */
+.simple-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolumny */
+    gap: 20px; /* Odstępy między kafelkami */
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* Kafelki */
+.grid-item {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.grid-item img {
+    width: 100%; /* Zdjęcia wypełniają całą szerokość */
+    height: 300px; /* Stała wysokość kafelków */
+    object-fit: cover; /* Dopasowanie zdjęć bez deformacji */
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efekt powiększenia po najechaniu */
+.grid-item img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+.grid-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    transition: opacity 0.3s ease-in-out;
+}
+/* Tytuły pod zdjęciami */
+.grid-item h3 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.grid-item {
+    animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* 🔵 Na mniejszych ekranach zmieniamy siatkę w poziomy slider */
+/* Stylizacja slidera na urządzeniach mobilnych */
+@media (max-width: 799px) {
+    .simple-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        position: relative;
+        padding-bottom: 30px; /* Miejsce na nawigację */
+    }
+
+    .grid-item {
+        flex: 0 0 90%;
+        max-width: 90%;
+        position: relative;
+        scroll-snap-align: center;
+        text-align: center;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+        transform: translateY(10px);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .grid-item:hover {
+        transform: translateY(0);
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    .grid-item img {
+        width: 100%;
+        display: block;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+    }
+    .grid-item:hover img {
+        transform: scale(1.05);
+    }
+
+    #section2 {
+        position: relative; /* Zapewnia, że kropki będą w obrębie sekcji */
+    }
+
+    /* Nawigacja - kropeczki */
+    #section2 .slider-dots {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+    }
+
+    #section2 .dot {
+        width: 10px;
+        height: 10px;
+        background-color: #0a090980;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+
+    #section2 .dot.active {
+        background-color: hwb(17 7% 9%);
+    }
+}
+
+
+
+
+
+/* Podstawowe style modala */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Aktywny modal */
+.modal.active {
+    display: flex;
+}
+
+/* Kontener zawartości modala */
+.modal-content {
+    background: #fff;
+    width: 92%;
+    height: 98%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Nagłówek modala */
+.modal-header {
+    background-color: #f1f1f1; /* Kolor tła nagłówka */
+    display: flex;
+    align-items: center; /* Wyśrodkowanie pionowe */
+    justify-content: center; /* Wyśrodkowanie poziome */
+    border-bottom: 1px solid #ddd; /* Linia oddzielająca nagłówek */
+    position: relative; /* Umożliwia absolutne pozycjonowanie przycisku */
+    height: 70px; /* Stała wysokość nagłówka */
+}
+
+/* Tytuł modala (upewniamy się, że jest wyśrodkowany) */
+.modal-header h2.modal-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Pełne wyśrodkowanie */
+    text-align: center;
+}
+
+/* Przycisk zamykania */
+.close-button {
+    position: absolute;
+    right: 20px; /* Pozycja po prawej */
+    top: 50%;
+    transform: translateY(-50%); /* Pionowe wyśrodkowanie */
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #f0c040;
+}
+
+
+
+/* Główna sekcja przewijania */
+.modal-scrollable {
+    flex: 1;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none; /* Ukrycie scrollbara dla Firefoxa */
+    -ms-overflow-style: none; /* Ukrycie scrollbara dla IE/Edge */
+}
+
+/* Ukrycie scrollbara dla WebKit (Chrome, Safari) */
+.modal-scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+/* Każda sekcja obrazu */
+.modal-section {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    background: #fff;
+}
+
+/* Stylizacja zdjęć */
+.modal-section img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+
+
+/* Animacja pojawiania się */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.70);
+    }
+    to {
+        opacity: 1;
+        transform: scale(2);
+    }
+}
+
+
+/* Stylizacja całej sekcji3 */ 
+
+
+/* ================== Sekcja 3 – PROJEKT ================== */
+/* 🔹 SEKCJA 3 - Naprawiony layout */
+#section3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Zapobiega wystawaniu */
+}
+
+/* 🔹 Układ kafelków */
+.project-gallery {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 🔹 Styl kafelków */
+.project-card {
+    position: relative;
+    flex: 1 1 calc(50% - 20px); /* Dwa kafelki obok siebie na desktopie */
+    max-width: 550px;
+    border-radius: 20px;
+    overflow: hidden;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Obrazy w kafelkach */
+.project-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+}
+
+/* 🔹 Naprawiony overlay z tekstem */
+.project-card .project-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0 0 20px 20px;
+}
+
+/* 🔹 Responsywność */
+@media (max-width: 799px) {
+    .project-gallery {
+        flex-direction: column; /* Na mobilu kafelki jeden pod drugim */
+        gap: 15px;
+    }
+
+    .project-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+        border-radius: 15px;
+    }
+}
+
+
+
+
+
+#section4 { background-color: hsl(0, 0%, 100%); }
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolumny */
+    grid-template-rows: repeat(3, 1fr); /* 3 wiersze */
+    gap: 10px; /* Odstępy między kafelkami */
+    width: 100%; /* Pełna szerokość sekcji */
+    max-width: 1500px;
+    height: 100%; /* Pełna wysokość sekcji */
+    padding: 10px; /* Odstęp wewnętrzny sekcji */
+}
+
+
+.gallery-item {
+    position: relative;
+    perspective: 1000px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3; /* Utrzymanie proporcji */
+    cursor: pointer;
+}
+
+.gallery-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Przybliżenie do 110% */
+}
+.gallery-item .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1rem;
+    opacity: 0; /* Domyślnie ukryty */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+}
+
+.gallery-item:hover .title {
+    opacity: 1; /* Widoczny po najechaniu */
+    transform: translateY(0);
+}
+
+
+
+
+/* Lightbox */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    z-index: 2000;
+    flex-direction: column;
+    backdrop-filter: blur(10px); /* Efekt rozmycia */
+    background: rgba(0, 0, 0, 0.6); /* Przyciemnienie */
+    backdrop-filter: blur(10px);
+}
+
+.lightbox.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+.lightbox-carousel {
+display: flex;
+position: relative;
+max-width: 80%;
+max-height: 80%;
+transition: transform 0.5s ease; /* Płynne przejście między zdjęciami */
+}
+.lightbox-carousel img {
+    border-radius: 15px; /* Zaokrąglone rogi */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Cień wokół zdjęcia */
+    border: 4px solid rgba(255, 255, 255, 0.3); /* Elegancka ramka */
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+
+
+.lightbox-carousel img:hover {
+    transform: scale(1.05); /* Delikatne powiększenie */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7); /* Mocniejszy cień */
+}
+
+
+.carousel {
+display: flex;
+transition: transform 0.5s ease-in-out; /* Płynne przejścia między zdjęciami */
+width: 100%; /* Szerokość dostosowana do kontenera */
+}
+
+.carousel img {
+flex-shrink: 0;
+width: 100%; /* Każde zdjęcie zajmuje pełną szerokość */
+max-height: 100%; /* Dopasowanie do kontenera */
+object-fit: contain; /* Dopasowanie zdjęcia bez deformacji */
+display: block;
+}
+/* Domyślny styl dla zdjęć w karuzeli */
+.carousel img {
+    cursor: pointer;
+    opacity: 0.5; /* Zdjęcia obok będą przyciemnione */
+    transform: scale(0.8); /* Zdjęcia obok będą mniejsze */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Aktywne zdjęcie na środku */
+.carousel img.active {
+    opacity: 1;
+    transform: scale(1); /* Normalny rozmiar dla aktywnego zdjęcia */
+}
+
+/* Efekt najechania na zdjęcie obok */
+.carousel img:hover {
+    transform: scale(0.95);
+}
+
+
+.description {
+    background: white;
+    max-width: 80%;
+    padding: 15px;
+    text-align: center;
+    color: #333;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+}
+
+.nav-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Podświetlenie */
+}
+
+.nav-arrow.left {
+    left: -60px;
+}
+
+.nav-arrow.right {
+    right: -60px;
+}
+
+.dots {
+    position: absolute;
+    bottom: -110px; /* Przesunięcie kropek niżej */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5;
+}
+
+
+.dot {
+width: 12px;
+height: 12px;
+background-color: #ccc;
+border-radius: 50%;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.dot.active {
+background-color: white; /* Aktywna kropka */
+}
+#section5 {
+    width: 100%;
+    padding: 60px 0;
+    background: linear-gradient(to bottom, rgba(240, 192, 64, 0.9), rgba(0, 0, 0, 0.8)); /* Z przezroczystością */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+/* Kontener na treść kontaktową */
+.contact-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+/* Lewa strona */
+.contact-info {
+    width: 50%;
+}
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.info-item i {
+    font-size: 1.2rem;
+    color: #f0c040;
+    margin-right: 10px;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.2rem;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #f0c040;
+}
+
+/* Prawa strona */
+.contact-form {
+    width: 50%;
+}
+
+.contact-form h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact-form form input,
+.contact-form form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.contact-form form input:focus,
+.contact-form form textarea:focus {
+    border-color: #f0c040;
+}
+
+.contact-form form button {
+    padding: 15px 30px;
+    background-color: #f0c040;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form form button:hover {
+    background-color: #e0b030;
+}
+.contact-section {
+    width: 100%;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f0c040, #000000); /* Skośny gradient */
+    color: white;
+}
+
+
+
