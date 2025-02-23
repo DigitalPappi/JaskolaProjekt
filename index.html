@@ -1,341 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moje Realizacje</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            overflow-x: hidden;
-        }
+    <title>Strona z pełnoekranowymi sekcjami</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome dla ikon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-        header 
-            header {
-    background-color: #000; /* Czarne tło */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px; /* Wysokość header */
-    padding: 0;
-}
-
-header img {
-    max-height: 100%; /* Logo zajmuje całą wysokość header */
-    max-width: 100%;
-    object-fit: contain; /* Dopasowanie logo bez rozciągania */
-}
-.hero {
-    width: 100%;
-    height: 100vh; /* Pełna wysokość ekranu */
-    background-color: black; /* Dodatkowe tło, gdyby obraz się nie załadował */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Zdjęcie wypełnia całą sekcję */
-}
-
-
-        .gallery-container {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px auto;
-            max-width: 1200px;
-            gap: 10px;
-        }
-
-        .gallery-item {
-            position: relative;
-            flex: 1;
-            cursor: pointer;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .gallery-item .title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 1rem;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-
-        /* Lightbox */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s, opacity 0.3s ease-in-out;
-            z-index: 100;
-            flex-direction: column;
-        }
-
-        .lightbox.visible {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .lightbox-carousel {
-            position: relative;
-            max-width: 80%;
-            max-height: 70%;
-            overflow: hidden;
-        }
-
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel img {
-            min-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-        }
-
-        .description {
-            background: white;
-            max-width: 80%;
-            padding: 15px;
-            text-align: center;
-            color: #333;
-            margin-top: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 2rem;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .nav-arrow.left {
-            left: 10px;
-        }
-
-        .nav-arrow.right {
-            right: 10px;
-        }
-
-        .dots {
-            text-align: center;
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin: 5px;
-            background-color: #ccc;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .dot.active {
-            background-color: #333;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #000;
-            color: white;
-            /* Media Queries dla ekranów o szerokości do 768px (smartfony) */
-@media (max-width: 768px) {
-    header {
-        height: 100px; /* Mniejsza wysokość header na telefonach */
-    }
-
-    header img {
-        max-height: 80px; /* Zmniejszenie logo */
-    }
-
-    .hero {
-        height: 70vh; /* Skrócenie sekcji hero na małych ekranach */
-    }
-
-    .gallery-container {
-        flex-direction: column; /* Zmiana układu galerii na pionowy */
-        gap: 20px;
-    }
-
-    .gallery-item {
-        flex: none; /* Przywrócenie pełnej szerokości dla elementów galerii */
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    .lightbox-carousel {
-        max-width: 95%;
-        max-height: 60%;
-    }
-
-    .description {
-        font-size: 0.9rem; /* Zmniejszenie tekstu opisu */
-        padding: 10px;
-    }
-
-    footer {
-        font-size: 0.8rem; /* Mniejsza czcionka dla stopki */
-    }
-}
-
-        }
-    </style>
 </head>
 <body>
     <header>
-        <header>
-            <header>
-                <img src="images/logo.png" alt="Logo" style="height: 100%; max-height: 150px; margin: auto;">
-            </header>
-            </div>
-        </header>
-        
+        <div class="header-container">
+            <img src="images/logo.png" alt="Logo" class="logo">
+        </div>
+        <nav class="nav-menu">
+            <a href="#section1">O NAS</a>
+            <a href="#section2">OFERTA</a> 
+            <a href="#section3">PROJEKT</a>   
+            <a href="#section4">REALIZACJE</a>
+            <a href="#section5">KONTAKT</a>
+        </nav>
     </header>
-    <section class="hero">
-        <img src="images/hero.png" alt="Hero Image">
-    </section>
+    <main class="container">
+        <section class="section" id="section1">
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide active"><img src="images/hero1.png" alt="Obraz 1"></div>
+                    <div class="slide"><img src="images/hero2.jpeg" alt="Obraz 2"></div>
+                    <div class="slide"><img src="images/hero3.jpeg" alt="Obraz 3"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="section2"> 
+                <div class="simple-grid">
+                    <div class="grid-item" onclick="openModal(1)">
+                        <img src="images/oferta1.jpg" alt="Meble Biurowe">
+                        <h3>Meble Biurowe</h3>
+                    </div>
+                    <div class="grid-item" onclick="openModal(2)">
+                        <img src="images/oferta2.jpg" alt="Meble Gabinetowe">
+                        <h3>Meble Gabinetowe</h3>
+                    </div>
+                    <div class="grid-item" onclick="openModal(3)">
+                        <img src="images/oferta3.jpg" alt="Fotele I Krzesła">
+                        <h3>Fotele I Krzesła</h3>
+                    </div>
+                    <div class="grid-item" onclick="openModal(4)">
+                        <img src="images/oferta4.jpg" alt="Sofy Biurowe">
+                        <h3>Sofy Biurowe</h3>
+                    </div>
+                    <div class="grid-item" onclick="openModal(5)">
+                        <img src="images/oferta5.jpg" alt="Meble Kuchenne">
+                        <h3>Meble Kuchenne</h3>
+                    </div>
+                    <div class="grid-item" onclick="openModal(6)">
+                        <img src="images/oferta6.jpg" alt="Meble Łazienkowe">
+                        <h3>Meble Łazienkowe</h3>
+                    </div>
+                </div>      
+  <!-- Modal dla Meble Kuchenne -->
+                <div id="modal1" class="modal">
+                <div class="modal-content">
+        <!-- Nagłówek modala -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Meble Biurowe</h2>
+                  <button class="close-button" onclick="closeModal()">×</button>
+        </div>
+
+        <!-- Sekcja przewijania ze zdjęciami -->
+        <div class="modal-scrollable">
+            <div class="modal-section">
+                <img src="images/oferta1-1.jpg" alt="Zdjęcie 1">
+            </div>
+            <div class="modal-section">
+                <img src="images/oferta1-2.jpg" alt="Zdjęcie 2">
+            </div>
+            <div class="modal-section">
+                <img src="images/oferta1-3.jpg" alt="Zdjęcie 3">
+            </div>
+        </div>
+        </section>
+        
+        <section class="section" id="section3">
+            <div class="project-gallery">
+                <!-- Pierwszy kafelek -->
+                <div class="project-card">
+                    <img src="images/projekt1.jpg" alt="Projekt 1">
+                    <div class="project-info">
+                        <h3>Projekt Nowoczesny</h3>
+                    </div>
+                </div>
+        
+                <!-- Drugi kafelek -->
+                <div class="project-card">
+                    <img src="images/projekt2.jpg" alt="Projekt 2">
+                    <div class="project-info">
+                        <h3>Projekt Klasyczny</h3>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="images/projekt3.jpg" alt="Projekt 3">
+                    <div class="project-info">
+                        <h3>Projekt Super</h3>
+                    </div>
+                </div>
+            </div>
+</section>
+            
+        
     
-    <!-- Kontenery galerii -->
-    <div class="gallery-container">
-        <div class="gallery-item" onclick="openLightbox(0)">
-            <img src="images/realizacja1.jpeg" alt="Galeria 1">
-            <div class="title">Realizacja 1</div>
+        <section class="section" id="section4">
+            <div class="gallery-container">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="images/realizacja1.jpeg" alt="Galeria 1">
+                    <div class="title">KuchniaBANG</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="images/realizacja2.jpeg" alt="Galeria 2">
+                    <div class="title">MakeitBoom</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="images/realizacja3.jpeg" alt="Galeria 3">
+                    <div class="title">HATEMBENARFA</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="images/realizacja4.jpeg" alt="Galeria 4">
+                    <div class="title">Realizacja 4</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="images/realizacja5.jpeg" alt="Galeria 5">
+                    <div class="title">Realizacja 5</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="images/realizacja6.jpeg" alt="Galeria 6">
+                    <div class="title">Realizacja 6</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(6)">
+                    <img src="images/realizacja7.jpeg" alt="Galeria 7">
+                    <div class="title">Realizacja 7</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(7)">
+                    <img src="images/realizacja8.jpeg" alt="Galeria 8">
+                    <div class="title">Realizacja 8</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(8)">
+                    <img src="images/realizacja9.jpeg" alt="Galeria 9">
+                    <div class="title">Realizacja 9</div>
+                </div>
+            </div>
+        
+            <!-- Lightbox -->
+            <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+                <div class="lightbox-carousel">
+                    <div class="carousel" id="carousel"></div>
+                    <button class="nav-arrow left" id="prev">&#10094;</button>
+                    <button class="nav-arrow right" id="next">&#10095;</button>
+                    <div class="dots" id="dots"></div>
+                </div>
+                <div class="description" id="description">Opis realizacji...</div>
+            </div>
+        </section>
+
+        <!-- SEKCKA KONTAKT -->
+<section id="section5" class="section">
+    <div class="contact-container">
+        
+        <!-- LEWA STRONA: Podsumowanie i dane kontaktowe -->
+        <div class="contact-info">
+            <h2>Skontaktuj się z nami</h2>
+            <p>Masz pytania? Wypełnij formularz lub skontaktuj się z nami bezpośrednio!</p>
+            
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>ul. Przykładowa 12, 00-000 Warszawa</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-phone-alt"></i>
+                <p>+48 123 456 789</p>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <p>kontakt@twojafirma.pl</p>
+            </div>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
         </div>
-        <div class="gallery-item" onclick="openLightbox(1)">
-            <img src="images/realizacja2.jpeg" alt="Galeria 2">
-            <div class="title">Realizacja 2</div>
+
+        <!-- PRAWA STRONA: Formularz kontaktowy -->
+        <div class="contact-form">
+            <h2>Napisz do nas</h2>
+            <form action="send_mail.php" method="POST">
+                <input type="text" name="name" placeholder="Twoje Imię" required>
+                <input type="email" name="email" placeholder="Twój Email" required>
+                <textarea name="message" rows="5" placeholder="Twoja wiadomość..." required></textarea>
+                <button type="submit">Wyślij wiadomość</button>
+            </form>
         </div>
-        <div class="gallery-item" onclick="openLightbox(2)">
-            <img src="images/realizacja3.jpeg" alt="Galeria 3">
-            <div class="title">Realizacja 3</div>
-        </div>
+
     </div>
+</section>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-        <div class="lightbox-carousel">
-            <div class="carousel" id="carousel"></div>
-            <button class="nav-arrow left" id="prev">&#10094;</button>
-            <button class="nav-arrow right" id="next">&#10095;</button>
-            <div class="dots" id="dots"></div>
-        </div>
-        <div class="description" id="description">Opis realizacji...</div>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Moje Realizacje. Wszystkie prawa zastrzeżone.</p>
-    </footer>
-
-    <script>
-        const lightbox = document.getElementById('lightbox');
-        const carousel = document.getElementById('carousel');
-        const dotsContainer = document.getElementById('dots');
-        const description = document.getElementById('description');
-        const prevButton = document.getElementById('prev');
-        const nextButton = document.getElementById('next');
-        const images = [
-            ['images/realizacja1.jpeg', 'images/realizacja1_2.jpeg', 'images/realizacja1_3.jpeg'],
-            ['images/realizacja2.jpeg', 'images/realizacja2_2.jpeg', 'images/realizacja2_3.jpeg'],
-            ['images/realizacja3.jpeg', 'images/realizacja3_2.jpeg', 'images/realizacja3_3.jpeg']
-        ];
-        const descriptions = [
-            "Projekt eleganckiego salonu z nowoczesnym oświetleniem i wygodną sofą.",
-            "Stylowa kuchnia z wyspą i naturalnymi materiałami wykończeniowymi.",
-            "Przytulna sypialnia z minimalistycznym wystrojem i ciepłym oświetleniem."
-        ];
-
-        let currentGallery = 0;
-        let currentIndex = 0;
-
-        function openLightbox(galleryIndex) {
-            currentGallery = galleryIndex;
-            currentIndex = 0;
-            description.innerText = descriptions[currentGallery];
-            updateCarousel();
-            lightbox.classList.add('visible');
-        }
-
-        function closeLightbox(event) {
-            if (event.target === lightbox) {
-                lightbox.classList.remove('visible');
-            }
-        }
-
-        function updateCarousel() {
-            carousel.innerHTML = images[currentGallery].map(src => `<img src="${src}" alt="Zdjęcie">`).join('');
-            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-            renderDots();
-        }
-
-        function renderDots() {
-            dotsContainer.innerHTML = images[currentGallery].map((_, i) => 
-                `<span class="dot ${i === currentIndex ? 'active' : ''}" onclick="goToSlide(${i})"></span>`
-            ).join('');
-        }
-
-        function goToSlide(index) {
-            currentIndex = index;
-            updateCarousel();
-        }
-
-        prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images[currentGallery].length - 1;
-            updateCarousel();
-        });
-
-        nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % images[currentGallery].length;
-            updateCarousel();
-        });
-    </script>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
