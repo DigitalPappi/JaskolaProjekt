@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona z pełnoekranowymi sekcjami</title>
+    <!-- Google Fonts: Lato -->
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
     <!-- Font Awesome dla ikon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -15,72 +18,55 @@
             <img src="images/logo.png" alt="Logo" class="logo">
         </div>
         <nav class="nav-menu">
-            <a href="#section1">O NAS</a>
-            <a href="#section2">OFERTA</a> 
-            <a href="#section3">PROJEKT</a>   
-            <a href="#section4">REALIZACJE</a>
-            <a href="#section5">KONTAKT</a>
+            <a href="#section1">o nas</a>
+            <a href="#section2">oferta</a> 
+            <a href="#section3">wnętrza</a>   
+            <a href="#section4">realizacje</a>
+            <a href="#section5">kontakt</a>
         </nav>
     </header>
     <main class="container">
         <section class="section" id="section1">
-            <div class="slider">
-                <div class="slides">
-                    <div class="slide active"><img src="images/hero1.png" alt="Obraz 1"></div>
-                    <div class="slide"><img src="images/hero2.jpeg" alt="Obraz 2"></div>
-                    <div class="slide"><img src="images/hero3.jpeg" alt="Obraz 3"></div>
-                </div>
+            <div class="parallax-wrapper">
+              <img src="images/hero1.png" alt="Tło" class="parallax-bg">
+              <div class="parallax-content">
+                <h1>Znajdź swój styl</h1>
+                <p>Tworzymy przestrzenie z charakterem i pomysłem.</p>
+              </div>
             </div>
-        </section>
+          </section>
+          
+          
         <section class="section" id="section2"> 
-                <div class="simple-grid">
-                    <div class="grid-item" onclick="openModal(1)">
-                        <img src="images/oferta1.jpg" alt="Meble Biurowe">
-                        <h3>Meble Biurowe</h3>
-                    </div>
-                    <div class="grid-item" onclick="openModal(2)">
-                        <img src="images/oferta2.jpg" alt="Meble Gabinetowe">
-                        <h3>Meble Gabinetowe</h3>
-                    </div>
-                    <div class="grid-item" onclick="openModal(3)">
-                        <img src="images/oferta3.jpg" alt="Fotele I Krzesła">
-                        <h3>Fotele I Krzesła</h3>
-                    </div>
-                    <div class="grid-item" onclick="openModal(4)">
-                        <img src="images/oferta4.jpg" alt="Sofy Biurowe">
-                        <h3>Sofy Biurowe</h3>
-                    </div>
-                    <div class="grid-item" onclick="openModal(5)">
-                        <img src="images/oferta5.jpg" alt="Meble Kuchenne">
-                        <h3>Meble Kuchenne</h3>
-                    </div>
-                    <div class="grid-item" onclick="openModal(6)">
-                        <img src="images/oferta6.jpg" alt="Meble Łazienkowe">
-                        <h3>Meble Łazienkowe</h3>
-                    </div>
-                </div>      
-  <!-- Modal dla Meble Kuchenne -->
-                <div id="modal1" class="modal">
-                <div class="modal-content">
-        <!-- Nagłówek modala -->
-                <div class="modal-header">
-                    <h2 class="modal-title">Meble Biurowe</h2>
-                  <button class="close-button" onclick="closeModal()">×</button>
-        </div>
-
-        <!-- Sekcja przewijania ze zdjęciami -->
-        <div class="modal-scrollable">
-            <div class="modal-section">
-                <img src="images/oferta1-1.jpg" alt="Zdjęcie 1">
+            <div class="simple-grid">
+              <div class="grid-item" onclick="openModal(1)">
+                <img src="images/oferta1-1.jpg" alt="Biura i gabinety">
+                <div class="grid-title">Biura i gabinety</div>
+              </div>
+              <div class="grid-item" onclick="openModal(2)">
+                <img src="images/oferta2-1.jpg" alt="Open space i coworking">
+                <div class="grid-title">Open space i coworking</div>
+              </div>
+              <div class="grid-item" onclick="openModal(3)">
+                <img src="images/oferta3-1.jpg" alt="Sale konferencyjne">
+                <div class="grid-title">Sale konferencyjne</div>
+              </div>
+              <div class="grid-item" onclick="openModal(4)">
+                <img src="images/oferta4-1.jpg" alt="Recepcje i lobby">
+                <div class="grid-title">Recepcje i lobby</div>
+              </div>
+              <div class="grid-item" onclick="openModal(5)">
+                <img src="images/oferta5-1.jpg" alt="Anskesy kuchenne i jadalnie">
+                <div class="grid-title">Aneksy kuchene i jadalnie</div>
+              </div>
+              <div class="grid-item" onclick="openModal(6)">
+                <img src="images/oferta6-1.jpg" alt="Showroomy i strefy klienta">
+                <div class="grid-title">Showroomy i strefy klienta</div>
+              </div>
             </div>
-            <div class="modal-section">
-                <img src="images/oferta1-2.jpg" alt="Zdjęcie 2">
-            </div>
-            <div class="modal-section">
-                <img src="images/oferta1-3.jpg" alt="Zdjęcie 3">
-            </div>
-        </div>
-        </section>
+          </section>
+    
+                    
         
         <section class="section" id="section3">
             <div class="project-gallery">
@@ -88,7 +74,7 @@
                 <div class="project-card">
                     <img src="images/projekt1.jpg" alt="Projekt 1">
                     <div class="project-info">
-                        <h3>Projekt Nowoczesny</h3>
+                        <h3>ZAMÓW PROJEKT</h3>
                     </div>
                 </div>
         
@@ -96,14 +82,7 @@
                 <div class="project-card">
                     <img src="images/projekt2.jpg" alt="Projekt 2">
                     <div class="project-info">
-                        <h3>Projekt Klasyczny</h3>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/projekt3.jpg" alt="Projekt 3">
-                    <div class="project-info">
-                        <h3>Projekt Super</h3>
+                        <h3>Zrealiz</h3>
                     </div>
                 </div>
             </div>
