@@ -6,10 +6,17 @@
 
 html, body {
     height: 100%;
-    font-family: Arial, sans-serif;
     scroll-behavior: smooth;
     overflow: auto;
 }
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+    -webkit-font-smoothing: antialiased;
+  }
+  
 
 /* Header */
 /* Nagłówek */
@@ -56,10 +63,9 @@ header {
     text-decoration: none;
     font-size: 1rem; /* Domyślna czcionka */
     font-weight: bold;
-    transition: background-color 1s ease, color 1.8s ease;
+    transition: background-color 1s ease, color 1.5s ease;
     position: relative;
-    padding: 10px 15px;
-    border-radius: 20px;
+    padding: 1px 7px;
 }
 
 /* Styl aktywnego linku */
@@ -131,17 +137,35 @@ header {
 
 
 
-/* Kontener przewijania */
 .container {
-    height: 100vh; /* Cała wysokość widoku */
-    scroll-snap-type: y mandatory; /* Wymuszenie przewijania w pionie */
+    height: 100svh; /* Cała wysokość widoku */
+    scroll-snap-type: y mandatory; /* Wymuszone przewijanie, ale płynniejsze */
     overflow-y: scroll; /* Włączenie przewijania */
     scroll-behavior: smooth; /* Płynne przewijanie */
+    -webkit-overflow-scrolling: touch; /* Poprawione przewijanie na iOS */
+    overscroll-behavior: none; /* Blokuje przewijanie poza sekcjami */
+}
+/* 🔹 Ukrycie paska przewijania wszędzie */
+
+/* Chrome, Safari, Opera */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar,
+.container::-webkit-scrollbar {
+  display: none;
 }
 
-/* Sekcje */
+/* Firefox */
+body,
+html,
+.container {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+
+/* 🔹 Sekcje */
 .section {
-    height: 100vh; /* Każda sekcja zajmuje cały ekran */
+    height: 100svh; /* Każda sekcja zajmuje cały ekran */
     padding-top: 100px;
     scroll-snap-align: start; /* Sekcja zatrzymuje się na początku */
     display: flex;
@@ -152,68 +176,30 @@ header {
     text-align: center;
 }
 
-
-
-.section1 { /*1 sekcja */
-    height: 100vh;
+/* 🔹 Tło i układ */
+#section1 {
+    position: relative;
+    background: url('hero1.png') center/cover no-repeat;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-}
+    align-items: center;
+  }
+  
 
-.slider {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.slides {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.slide.active {
-    opacity: 1;
-    z-index: 1;
-}
+  
+  
 
 
-/* Sekcja 2 */
+/* 🔹 SEKCJA 2 - Poprawione efekty */
 #section2 {
-    background-color: #ffffff;
+    background-color: hsl(0, 0%, 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#section2 h2 {
-    font-size: 2rem;
-    margin-bottom: 40px;
-    color: #333;
-}
-
-/* Siatka kafelków */
+/* 🔹 Siatka kafelków */
 .simple-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 kolumny */
@@ -222,52 +208,57 @@ header {
     margin: 0 auto;
 }
 
-/* Kafelki */
+/* 🔹 Kafelki */
 .grid-item {
     position: relative;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    overflow: hidden;
+    border-radius: 20px;
     cursor: pointer;
+    height: 300px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid hwb(0 19% 80%); /* cienka ramka */
+    background-color: rgb(255, 255, 255);
+    transition: transform 0.3s ease-in-out;
+    animation: fadeInUp 0.6s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* 🔹 Efekt powiększenia zdjęcia po najechaniu */
 .grid-item img {
-    width: 100%; /* Zdjęcia wypełniają całą szerokość */
-    height: 300px; /* Stała wysokość kafelków */
-    object-fit: cover; /* Dopasowanie zdjęć bez deformacji */
-    border-radius: 5px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: transform 0.4s ease-in-out;
+    will-change: transform;
 }
 
-/* Efekt powiększenia po najechaniu */
-.grid-item img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+.grid-item:hover img {
+    transform: scale(1.1); /* Przybliżenie do 110% */
 }
-.grid-item::after {
-    content: "";
+
+
+
+/* 🔹 Pasek z tytułem */
+.grid-title {
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
-    height: 35%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-    transition: opacity 0.3s ease-in-out;
-}
-/* Tytuły pod zdjęciami */
-.grid-item h3 {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 1000;
-}
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 12px 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 5;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -290,30 +281,21 @@ header {
         display: flex;
         flex-wrap: nowrap;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x mandatory; /* Przewijanie zatrzymuje się na kafelkach */
         -webkit-overflow-scrolling: touch;
         width: 100%;
         position: relative;
         padding-bottom: 30px; /* Miejsce na nawigację */
     }
-
+    
+    /* 🔹 Kafelki */
     .grid-item {
         flex: 0 0 90%;
-        max-width: 90%;
-        position: relative;
-        scroll-snap-align: center;
+        scroll-snap-align: center; /* Każdy kafelek zatrzymuje się na środku */
         text-align: center;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
-        transform: translateY(10px);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out;
     }
 
-    .grid-item:hover {
-        transform: translateY(0);
-        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
-    }
     .grid-item img {
         width: 100%;
         display: block;
@@ -353,9 +335,6 @@ header {
 }
 
 
-
-
-
 /* Podstawowe style modala */
 .modal {
     display: none;
@@ -364,10 +343,9 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 2000;
 }
 
 /* Aktywny modal */
@@ -377,11 +355,12 @@ header {
 
 /* Kontener zawartości modala */
 .modal-content {
-    background: #fff;
+    background: #ffffff;
     width: 92%;
     height: 98%;
-    border-radius: 10px;
+    border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid hwb(0 19% 80%); /* cienka ramka */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -389,20 +368,21 @@ header {
 
 /* Nagłówek modala */
 .modal-header {
-    background-color: #f1f1f1; /* Kolor tła nagłówka */
+    background-color: hsl(0, 0%, 100%); /* Kolor tła nagłówka */
     display: flex;
     align-items: center; /* Wyśrodkowanie pionowe */
     justify-content: center; /* Wyśrodkowanie poziome */
     border-bottom: 1px solid #ddd; /* Linia oddzielająca nagłówek */
     position: relative; /* Umożliwia absolutne pozycjonowanie przycisku */
     height: 70px; /* Stała wysokość nagłówka */
+    z-index: 2000;
 }
 
 /* Tytuł modala (upewniamy się, że jest wyśrodkowany) */
 .modal-header h2.modal-title {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #333;
+    color: hsl(0, 0%, 0%);
     position: absolute;
     left: 50%;
     top: 50%;
@@ -419,7 +399,7 @@ header {
     background: none;
     border: none;
     font-size: 2rem;
-    color: #333;
+    color: #000;
     cursor: pointer;
     transition: color 0.3s ease;
 }
@@ -428,128 +408,174 @@ header {
     color: #f0c040;
 }
 
-
-
-/* Główna sekcja przewijania */
-.modal-scrollable {
-    flex: 1;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scrollbar-width: none; /* Ukrycie scrollbara dla Firefoxa */
-    -ms-overflow-style: none; /* Ukrycie scrollbara dla IE/Edge */
-}
-
-/* Ukrycie scrollbara dla WebKit (Chrome, Safari) */
-.modal-scrollable::-webkit-scrollbar {
-    display: none;
-}
-
-/* Każda sekcja obrazu */
-.modal-section {
-    height: 100%;
+.modal-description {
+    padding: 40px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: hsl(0, 0%, 0%);
+    background: white;
+    border-bottom: 1px solid #ddd;
+  }
+  .hero-description {
+    text-align: center;
+    padding: 20px 30px;
+  }
+  
+  .hero-description h3 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .hero-description p {
+    font-size: 1.2rem;
+    color: #d88c00; /* pomarańcz Pinterest */
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  
+  .modal-gallery {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 16px;
+    padding: 30px 40px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+ 
+  
+  .modal-gallery img {
+    flex: 0 0 auto;
+    width: clamp(280px, 35vw, 600px); /* większe minimum i maksimum */
+    aspect-ratio: 4 / 3; /* zachowuje proporcje */
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     scroll-snap-align: start;
-    background: #fff;
-}
-
-/* Stylizacja zdjęć */
-.modal-section img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-
-
-
-/* Animacja pojawiania się */
-@keyframes fadeIn {
+    transition: transform 0.3s ease;
+  }
+  
+  
+  
+  .modal-gallery img:hover {
+    transform: scale(1.03);
+  }
+  
+  
+  .modal.active .modal-content {
+    animation: fadeUp 0.4s ease;
+  }
+  
+  @keyframes fadeUp {
     from {
-        opacity: 0;
-        transform: scale(0.70);
+      transform: translateY(20px);
+      opacity: 0;
     }
     to {
-        opacity: 1;
-        transform: scale(2);
+      transform: translateY(0);
+      opacity: 1;
     }
-}
+  }
+/* 🔹 Dodatkowe poprawki dla mobilnych */
+@media (max-width: 799px) {
+    .modal-gallery img {
+        width: 80vw;
+      }
+      
+   
+}   
 
 
 /* Stylizacja całej sekcji3 */ 
 
 
-/* ================== Sekcja 3 – PROJEKT ================== */
-/* 🔹 SEKCJA 3 - Naprawiony layout */
-#section3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Zapobiega wystawaniu */
-}
 
 /* 🔹 Układ kafelków */
 .project-gallery {
     display: flex;
-    gap: 20px;
-    max-width: 1200px;
+    flex-direction: row; /* Obok siebie na desktopie */
     width: 100%;
+    max-width: 1200px;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
+    gap: 20px;
 }
 
-/* 🔹 Styl kafelków */
+/* 🔹 Kafelki */
 .project-card {
     position: relative;
-    flex: 1 1 calc(50% - 20px); /* Dwa kafelki obok siebie na desktopie */
+    flex: 1; /* Równy podział */
     max-width: 550px;
+    height: auto; /* Automatyczna wysokość */
     border-radius: 20px;
     overflow: hidden;
-    object-fit: cover;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 40px hsla(273, 58%, 65%, 0.2);
 }
 
-/* 🔹 Obrazy w kafelkach */
+/* 🔹 Obrazy - Dopasowanie */
 .project-card img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    object-fit: cover;
     border-radius: 20px;
 }
 
-/* 🔹 Naprawiony overlay z tekstem */
-.project-card .project-info {
+/* 🔹 Efekt rozmycia na dole obrazu */
+/* 🔹 Subtelne rozmycie na dole zdjęcia */
+.project-card::after {
+    content: "";
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 0 0 20px 20px;
+    height: 10%; /* Rozmycie obejmuje tylko dolną część zdjęcia */
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.05), hsla(0, 2%, 44%, 0.3), transparent);
+    backdrop-filter: blur(4px); /* Subtelniejszy blur */
+    -webkit-backdrop-filter: blur(1px); /* Dla Safari */
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
 }
 
-/* 🔹 Responsywność */
+/* 🔹 Napisy nad warstwą blura */
+.project-card .project-info {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6rem; /* Trochę mniejsza czcionka dla lepszego dopasowania */
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 3; /* Wyżej niż blur */
+}
+
+
+/* 🔹 RESPONSYWNOŚĆ - Na mobilu kafelki jeden pod drugim */
 @media (max-width: 799px) {
     .project-gallery {
-        flex-direction: column; /* Na mobilu kafelki jeden pod drugim */
-        gap: 15px;
+        flex-direction: column; /* Jeden pod drugim */
+        width: 100%;
+        height: 100%;
+        gap: 0; /* Bez przerwy między kafelkami */
     }
 
     .project-card {
-        flex: 1 1 100%;
         max-width: 100%;
-        border-radius: 15px;
+        height: 50vh; /* Każdy kafelek zajmuje połowę ekranu */
+        border-radius: 0;
+    }
+
+    .project-card img {
+        height: 100%;
+        object-fit: cover;
     }
 }
 
@@ -562,7 +588,7 @@ header {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 kolumny */
     grid-template-rows: repeat(3, 1fr); /* 3 wiersze */
-    gap: 10px; /* Odstępy między kafelkami */
+    gap: 5px; /* Odstępy między kafelkami */
     width: 100%; /* Pełna szerokość sekcji */
     max-width: 1500px;
     height: 100%; /* Pełna wysokość sekcji */
@@ -577,6 +603,7 @@ header {
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
+    border: 1px solid hwb(0 19% 80%); /* cienka ramka */
     width: 100%;
     height: 100%;
     aspect-ratio: 4 / 3; /* Utrzymanie proporcji */
@@ -602,8 +629,8 @@ header {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
+    background: hsl(0, 0%, 100%);
+    color: #000000;
     text-align: center;
     padding: 10px 0;
     font-size: 1rem;
@@ -616,8 +643,6 @@ header {
     opacity: 1; /* Widoczny po najechaniu */
     transform: translateY(0);
 }
-
-
 
 
 /* Lightbox */
@@ -766,13 +791,7 @@ transition: background-color 0.3s ease;
 background-color: white; /* Aktywna kropka */
 }
 #section5 {
-    width: 100%;
-    padding: 60px 0;
     background: linear-gradient(to bottom, rgba(240, 192, 64, 0.9), rgba(0, 0, 0, 0.8)); /* Z przezroczystością */
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 
